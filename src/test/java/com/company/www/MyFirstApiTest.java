@@ -2,19 +2,20 @@ package com.company.www;
 
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.company.www.Pathes.BODY;
+import static com.company.www.Pathes.NAME;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 
-public class MyFirstApiTest {
+public class MyFirstApiTest extends BaseApiTest {
 
+    private Request request = new Request();
 
     @Test
     public void verifySomething() {
-        // set up our base URI
-        baseURI = "https://jsonplaceholder.typicode.com/";
-
         // send request and verify response
         given().
                 when().
@@ -35,8 +36,27 @@ public class MyFirstApiTest {
                     log().all()
                     .extract().response();
 
-        Assert.assertEquals(response.jsonPath().get("userId"), 2);
+        Assert.assertEquals(response.jsonPath().get("userId"), "1");
     }
 
+    @Test
+    public void verifyUser1() {
+        Response response = request.getUser(1);
 
+        Assert.assertEquals(response.jsonPath().get(NAME), "Leanne Graham");
+    }
+
+    @Test
+    public void verifyUser2() {
+        Response response = request.getUser(2);
+
+        Assert.assertEquals(response.jsonPath().get(NAME), "Ervin Howell");
+    }
+
+    @Test
+    public void verifyComment() {
+        Response response = request.getComment(1);
+
+        Assert.assertEquals(response.jsonPath().get(BODY), "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium");
+    }
 }
