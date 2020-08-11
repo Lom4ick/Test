@@ -4,8 +4,8 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.company.www.Pathes.BODY;
-import static com.company.www.Pathes.NAME;
+import static com.company.www.Paths.BODY;
+import static com.company.www.Paths.NAME;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 
