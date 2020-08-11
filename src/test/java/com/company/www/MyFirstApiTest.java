@@ -1,5 +1,6 @@
 package com.company.www;
 
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,6 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class MyFirstApiTest extends BaseApiTest {
 
     private Request request = new Request();
+    private Verify verify = new Verify();
 
     @Test
     public void verifySomething() {
@@ -35,7 +37,7 @@ public class MyFirstApiTest extends BaseApiTest {
                     log().all()
                     .extract().response();
 
-        Assert.assertEquals(response.jsonPath().get("userId"), "1");
+        Assert.assertEquals((int) response.jsonPath().get("userId"), 1);
     }
 
     @Test
@@ -44,15 +46,17 @@ public class MyFirstApiTest extends BaseApiTest {
         Assert.assertEquals(response.jsonPath().get(NAME), "Leanne Graham");
     }
 
+    @Feature("Users")
     @Test
     public void verifyUser2() {
         Response response = request.getUser(2);
-        Assert.assertEquals(response.jsonPath().get(NAME), "Ervin Howell");
+        Assert.assertEquals(response.jsonPath().get(NAME), "Ervin Howell2");
     }
 
+    @Feature("Comments")
     @Test
     public void verifyComment() {
         Response response = request.getComment(1);
-        Assert.assertEquals(response.jsonPath().get(BODY), "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium");
+        verify.verifyComment(response, BODY, "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium");
     }
 }
