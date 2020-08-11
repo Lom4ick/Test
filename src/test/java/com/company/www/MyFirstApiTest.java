@@ -2,7 +2,6 @@ package com.company.www;
 
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.company.www.Pathes.BODY;
@@ -42,21 +41,18 @@ public class MyFirstApiTest extends BaseApiTest {
     @Test
     public void verifyUser1() {
         Response response = request.getUser(1);
-
         Assert.assertEquals(response.jsonPath().get(NAME), "Leanne Graham");
     }
 
     @Test
     public void verifyUser2() {
         Response response = request.getUser(2);
-
         Assert.assertEquals(response.jsonPath().get(NAME), "Ervin Howell");
     }
 
     @Test
     public void verifyComment() {
         Response response = request.getComment(1);
-
         Assert.assertEquals(response.jsonPath().get(BODY), "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium");
     }
 }
