@@ -1,8 +1,8 @@
-package com.company.www;
+package com.company.api;
 
 import org.testng.annotations.BeforeMethod;
 
-import static com.company.www.Endpoints.BASE_URI;
+import static com.company.api.Endpoints.BASE_URI;
 import static io.restassured.RestAssured.baseURI;
 
 public class BaseApiTest {

@@ -1,19 +1,18 @@
-package com.company.www;
+package com.company.api;
 
+import com.company.api.response.post.Post;
+import com.company.api.response.user.User;
 import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.company.www.Paths.BODY;
-import static com.company.www.Paths.NAME;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 
 public class MyFirstApiTest extends BaseApiTest {
 
     private Request request = new Request();
-    private Verify verify = new Verify();
 
     @Test
     public void verifySomething() {
@@ -42,21 +41,21 @@ public class MyFirstApiTest extends BaseApiTest {
 
     @Test
     public void verifyUser1() {
-        Response response = request.getUser(1);
-        Assert.assertEquals(response.jsonPath().get(NAME), "Leanne Graham");
+        User user = request.getUser(1);
+        Assert.assertEquals(user.name, "Leanne Graham");
     }
 
     @Feature("Users")
-    @Test
+    @Test(testName = "Test name: Verify User", description = "Test Description: Verify User")
     public void verifyUser2() {
-        Response response = request.getUser(2);
-        Assert.assertEquals(response.jsonPath().get(NAME), "Ervin Howell2");
+        User user = request.getUser(2);
+        Assert.assertEquals(user.address.city, "Wisokyburgh");
     }
 
-    @Feature("Comments")
+    @Feature("Posts")
     @Test
-    public void verifyComment() {
-        Response response = request.getComment(1);
-        verify.verifyComment(response, BODY, "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium");
+    public void verifyPost() {
+        Post post = request.getPost(1);
+        Assert.assertEquals(post.userId, 1);
     }
 }

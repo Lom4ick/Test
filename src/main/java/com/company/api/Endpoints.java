@@ -1,4 +1,4 @@
-package com.company.www;
+package com.company.api;
 
 public class Endpoints {
 
@@ -6,4 +6,5 @@ public class Endpoints {
 
     public static final String USERS = "users/";
     public static final String COMMENTS = "comments/";
+    public static final String POSTS = "posts/";
 }
