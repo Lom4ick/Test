@@ -50,7 +50,7 @@ public class HomePage {
 
 
     @Step
-    public WebElement loginErrorMessage() {
+    public WebElement verifyLoginErrorMessage() {
         return getDriver().findElement(By.xpath(LOGIN_ERROR_MESSAGE));
     }
 }

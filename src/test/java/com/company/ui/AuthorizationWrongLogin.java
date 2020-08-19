@@ -20,6 +20,6 @@ public class AuthorizationWrongLogin extends BaseUiTest {
                 .setPassword("Qwerty123")
                 .clickEnterButton();
 
-        Assert.assertTrue(homePage.loginErrorMessage().isDisplayed());
+        Assert.assertTrue(homePage.verifyLoginErrorMessage().isDisplayed());
     }
 }
