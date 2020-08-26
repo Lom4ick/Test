@@ -1,56 +1,55 @@
 package com.company.ui.pages;
 
-import com.company.ReadFileData;
+import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import static com.company.ui.DriverManager.getDriver;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage {
 
     private static final String CABINET = "//a[@class='header-topline__user-link link-dashed']";
-    private static final String LOGIN_INPUT = "auth_email";
-    private static final String PASSWORD_INPUT = "auth_pass";
+    private static final String LOGIN_INPUT = "//*[@id='auth_email']";
+    private static final String PASSWORD_INPUT = "//*[@id='auth_pass']";
     private static final String ENTER_BUTTON = "//button[@class='button button_size_large button_color_green auth-modal__submit']";
 
-    private static final String LOGIN_ERROR_MESSAGE = "//p[@class='error-message error-message_type_tooltip error-message_type_text error-message_color_red']";
+    private static final String LOGIN_ERROR_MESSAGE = "//a[@class='error-message error-message_type_tooltip error-message_type_text error-message_color_red']";
 
-    private ReadFileData data = new ReadFileData();
-
-    @Step
-    public HomePage getHomePage() {
-        getDriver().get(data.getHomePageUrl());
+    public HomePage authorize() {
+        clickCabinet();
+        setLogin("tester123tester@i.ua");
+        setPassword("Automation555");
+        clickEnterButton();
         return this;
     }
 
     @Step
     public HomePage clickCabinet() {
-        getDriver().findElement(By.xpath(CABINET)).click();
+        $x(CABINET).click();
         return this;
     }
 
     @Step
     public HomePage setLogin(String login) {
-        getDriver().findElement(By.id(LOGIN_INPUT)).sendKeys(login);
+        $x(LOGIN_INPUT).setValue(login);
         return this;
     }
 
     @Step
     public HomePage setPassword(String password) {
-        getDriver().findElement(By.id(PASSWORD_INPUT)).sendKeys(password);
+        $x(PASSWORD_INPUT).setValue(password);
         return this;
     }
 
     @Step
     public HomePage clickEnterButton() {
-        getDriver().findElement(By.xpath(ENTER_BUTTON)).click();
+        $x(ENTER_BUTTON).click();
         return this;
     }
 
 
     @Step
-    public WebElement verifyLoginErrorMessage() {
-        return getDriver().findElement(By.xpath(LOGIN_ERROR_MESSAGE));
+    public HomePage verifyLoginErrorMessage() {
+        $x(LOGIN_ERROR_MESSAGE).shouldBe(Condition.appears);
+        return this;
     }
 }

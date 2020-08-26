@@ -12,11 +12,7 @@ public class SimpleUiTest extends BaseUiTest {
     @Test
     public void authorizationWrongLogin() {
         homePage
-                .getHomePage()
-                .clickCabinet()
-                .setLogin("kjsbdfjkbdsfjb@gmail.com")
-                .setPassword("wrongPassword")
-                .clickEnterButton()
+                .authorize()
                 .verifyLoginErrorMessage();
     }
 }
